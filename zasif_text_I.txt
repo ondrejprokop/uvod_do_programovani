@@ -1,0 +1,13 @@
+CAESAROVA ŠIFRA
+
+Posun: 1
+
+Původní text: 
+Vařila myšička kašičku?
+Jistě, ale úplně ji připálila!
+Průběžně se měla míchat a vařit se měla pouhých 20 minut.
+
+Zašifrovaný text: 
+Wbsjmb nztjdlb lbtjdlv?
+Kjtuf, bmf vqmof kj qsjqbmjmb!
+Qsvcfaof tf nfmb njdibu b wbsju tf nfmb qpvizdi 20 njovu.

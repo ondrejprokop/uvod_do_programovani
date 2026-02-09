@@ -1,0 +1,14 @@
+Praha - Santiago de Chile
+[50.08 ; 14.43] - [-33.44 ; -70.65]
+
+Ottawa - Kapské Město
+[45.42 ; -75.69] - [-33.93 ; 18.42]
+
+Tokyo - Velikonoční ostrov
+[35.68 ; 139.76] - [-27.13 ; -109.35]
+
+Sydney - Juneau
+[-33.87 ; 151.21] - [58.30 ; -134.42]
+
+Problémový případ, kdy by argument pro acos() byl větší než 1 nebo menší než -1
+[9 ; 5.6] - [3 ; 5.6]
