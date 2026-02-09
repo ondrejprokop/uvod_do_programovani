@@ -37,40 +37,39 @@ class Ortodroma:
         self.d = bod2.u * pi / 180 - bod1.u * pi / 180
 
     def vzdalenost(self):
-        self.c = acos(cos(self.s1) * cos(self.s2) + sin(self.s1) * sin(self.s2) * cos(self.d))
+        cosC = cos(self.s1) * cos(self.s2) + sin(self.s1) * sin(self.s2) * cos(self.d)
+        if cosC > 1:
+            cosC = 1
+        elif cosC < -1:
+            cosC = -1
+        self.c = acos(cosC)
         self.delka = 6371.1 * self.c
         return self.delka, self.c
     
     def azimut(self):
-        try: 
-            self.az1 = acos((cos(self.s2) - cos(self.s1) * cos(self.c)) / (sin(self.s1) * sin(self.c))) * 180 / pi 
-            self.az2 = acos((cos(self.s1) - cos(self.s2) * cos(self.c)) / (sin(self.s2) * sin(self.c))) * 180 / pi
+    
+        cos1 = (cos(self.s2) - cos(self.s1) * cos(self.c)) / (sin(self.s1) * sin(self.c))
+        if cos1 > 1:
+            cos1 = 1
+        elif cos1 < -1:
+            cos1 = -1
+        self.az1 = acos(cos1) * 180 / pi 
+
+        cos2 = (cos(self.s1) - cos(self.s2) * cos(self.c)) / (sin(self.s2) * sin(self.c))
+        if cos2 > 1:
+            cos2 = 1
+        elif cos2 < -1:
+            cos2 = -1
+        self.az2 = acos(cos2) * 180 / pi
             
-            if bod1.u > bod2.u and bod1.u - bod2.u <= 180:
-                self.az1 = 360 - self.az1
-            elif bod1.u > bod2.u and bod1.u - bod2.u > 180:
-                self.az2 = 360 - self.az2
-            elif bod1.u < bod2.u and bod2.u - bod1.u <= 180:
-                self.az2 = 360 - self.az2
-            elif bod1.u < bod2.u and bod2.u - bod1.u > 180:
-                self.az1 = 360 - self.az1
-
-        except ValueError:
-            if bod1.u == bod2.u:
-                if bod1.v < bod2.v:
-                    self.az1 = 0
-                    self.az2 = 180
-                else:
-                    self.az1 = 180
-                    self.az2 = 0
-            elif bod1.v == bod2.v:
-                if bod1.u < bod2.u:
-                    self.az1 = 90
-                    self.az2 = 270
-                else:
-                    self.az1 = 270
-                    self.az2 = 90
-
+        if bod1.u > bod2.u and bod1.u - bod2.u <= 180:
+            self.az1 = 360 - self.az1
+        elif bod1.u > bod2.u and bod1.u - bod2.u > 180:
+            self.az2 = 360 - self.az2
+        elif bod1.u < bod2.u and bod2.u - bod1.u <= 180:
+            self.az2 = 360 - self.az2
+        elif bod1.u < bod2.u and bod2.u - bod1.u > 180:
+            self.az1 = 360 - self.az1
         return self.az1, self.az2
     
     def info(self):
@@ -95,6 +94,9 @@ v1 = souradnice("Zadejte zeměpisnou šířku prvního bodu: ", -90, 90)
 u1 = souradnice("Zadejte zeměpisnou délku prvního bodu: ", -180, 180)
 v2 = souradnice("Zadejte zeměpisnou šířku druhého bodu: ", -90, 90)
 u2 = souradnice("Zadejte zeměpisnou délku druhého bodu: ", -180, 180)
+
+if v1 == v2 and u1 == u2:
+    raise Exception("Zadané body jsou identické, jejich vzdálenost je 0 km.")
 
 bod1 = Bod(v1, u1)
 bod1.info()
